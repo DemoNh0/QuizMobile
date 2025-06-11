@@ -1,0 +1,7 @@
+{
+  "name": "QuizTabs",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
