@@ -13,11 +13,10 @@
   </ion-item>
   <br>
   <ion-item>
-    <ion-input label="Insira seu nome" labelPlacement="floating" placeholder="Seu nome"></ion-input>
+    <ion-input label="Insira seu nome" labelPlacement="floating" placeholder="Seu nome" [(ngModel)]="user"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-button (click)="irParaQuiz(listaQuiz[2])">Ir para o quiz</ion-button>
-
+    <ion-button (click)="irParaQuiz(listaQuiz[0])">Vamos para o quiz {{user}}!</ion-button>
   </ion-item>
 
 </ion-content>

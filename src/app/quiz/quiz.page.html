@@ -10,12 +10,49 @@
       {{quiz.questao}}
     </ion-label>
   </ion-item>
-  <ion-radio-group>
+  <!-- <ion-radio-group>
     <ion-item *ngFor="let resposta of quiz.respostas">
       <ion-label>
         {{resposta}}
       </ion-label>
       <ion-radio slot="start" [value]="resposta"></ion-radio>
     </ion-item>
+  </ion-radio-group> -->
+
+  <ion-radio-group [(ngModel)]="respostaSelecionada">
+    <ion-item>
+      <ion-label>
+        {{listaQuiz[questao].respostas[0]}}
+      </ion-label>
+      <ion-radio slot="start" [value]="listaQuiz[questao].respostas[0]"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        {{listaQuiz[questao].respostas[1]}}
+      </ion-label>
+      <ion-radio slot="start" [value]="listaQuiz[questao].respostas[1]"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        {{listaQuiz[questao].respostas[2]}}
+      </ion-label>
+      <ion-radio slot="start" [value]="listaQuiz[questao].respostas[2]"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        {{listaQuiz[questao].respostas[3]}}
+      </ion-label>
+      <ion-radio slot="start" [value]="listaQuiz[questao].respostas[3]"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        {{listaQuiz[questao].respostas[4]}}
+      </ion-label>
+      <ion-radio slot="start" [value]="listaQuiz[questao].respostas[4]"></ion-radio>
+    </ion-item>
   </ion-radio-group>
+
+  <ion-item>
+    <ion-button (click)="nextQuiz()">Próximo</ion-button>
+  </ion-item>
 </ion-content>

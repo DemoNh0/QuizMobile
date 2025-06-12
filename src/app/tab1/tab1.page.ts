@@ -1,4 +1,4 @@
-import { IQuiz } from './../model/IQuiz';
+import { IQuiz, IUser } from './../model/IQuiz';
 import { Component } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router'
 import { ToastController, AlertController } from '@ionic/angular';
@@ -9,6 +9,8 @@ import { ToastController, AlertController } from '@ionic/angular';
   styleUrls: ['tab1.page.scss'],
   standalone: false,
 })
+
+
 export class Tab1Page {
 
   constructor(public router: Router,
@@ -17,23 +19,33 @@ export class Tab1Page {
               ) {}
 
 
+
+  jogador: IUser [] = [
+    {
+      nome: this.user,
+      pontuacao: 0
+    }
+  ]
+
+
+
   listaQuiz: IQuiz[] = [
     {
       numeroQuestao: "1",
       questao: "Qual personagem principal de 'Super Mario' é conhecido por sua cor vermelha?",
-      respostas: ["Luigi", "Yoshi", "Bowser", "Wario", "Mario"],
+      respostas: ["Luigi", "Yoshi", "Mario", "Bowser", "Wario" ],
       respostaCerta: "Mario"
     },
     {
       numeroQuestao: "2",
       questao: "Em que ano foi lançado o primeiro 'Pokémon' para Game Boy?",
-      respostas: ["1998", "2000", "1995", "1997", "1996"],
+      respostas: ["1998", "2000", "1996", "1995", "1997" ],
       respostaCerta: "1996"
     },
     {
       numeroQuestao: "3",
       questao: "Qual é o nome do console portátil da Nintendo que foi lançado em 2004 e ficou famoso pelo 'Pokémon FireRed/LeafGreen'?",
-      respostas: ["Nintendo 3DS", "Nintendo DS", "PlayStation Portable", "Xbox Portable", "Game Boy Advance SP"],
+      respostas: ["Nintendo 3DS", "Nintendo DS", "PlayStation Portable", "Game Boy Advance SP", "Xbox Portable"],
       respostaCerta: "Game Boy Advance SP"
     },
     {
@@ -45,37 +57,37 @@ export class Tab1Page {
     {
       numeroQuestao: "5",
       questao: "Qual console foi o primeiro a ser lançado pela Sony?",
-      respostas: ["PS2", "PSP", "PS3", "PS4", "PlayStation"],
+      respostas: ["PlayStation", "PS2", "PSP", "PS3", "PS4"],
       respostaCerta: "PlayStation"
     },
     {
       numeroQuestao: "6",
       questao: "Em 'The Legend of Zelda', qual é o nome da princesa que Link tenta salvar?",
-      respostas: ["Peach", "Daisy", "Zelda", "Samus", "Zelda"],
+      respostas: ["Peach", "Daisy", "Zelda", "Samus", "H. Romeu"],
       respostaCerta: "Zelda"
     },
     {
       numeroQuestao: "7",
       questao: "Qual jogo da Rockstar é famoso por sua temática de faroeste?",
-      respostas: ["GTA 5", "L.A. Noire", "Max Payne", "Manhunt", "Red Dead Redemption"],
+      respostas: ["GTA 5", "L.A. Noire", "Max Payne", "Red Dead Redemption", "Manhunt"],
       respostaCerta: "Red Dead Redemption"
     },
     {
       numeroQuestao: "8",
       questao: "Quem é o criador do jogo 'Minecraft'?",
-      respostas: ["John Carmack", "Shigeru Miyamoto", "Hideo Kojima", "Will Wright", "Markus 'Notch' Persson"],
+      respostas: ["Markus 'Notch' Persson", "John Carmack", "Shigeru Miyamoto", "Hideo Kojima", "Will Wright"],
       respostaCerta: "Markus 'Notch' Persson"
     },
     {
       numeroQuestao: "9",
       questao: "Qual foi o primeiro jogo a apresentar o personagem Master Chief?",
-      respostas: ["Halo 3", "Halo: Reach", "Halo 2", "Destiny", "Halo: Combat Evolved"],
+      respostas: ["Halo 3", "Halo: Reach", "Halo 2", "Halo: Combat Evolved", "Destiny"],
       respostaCerta: "Halo: Combat Evolved"
     },
     {
       numeroQuestao: "10",
       questao: "Em qual jogo o personagem principal se chama 'Link'?",
-      respostas: ["Final Fantasy VII", "Super Mario Bros", "Metroid", "Castlevania", "The Legend of Zelda"],
+      respostas: ["Final Fantasy VII", "The Legend of Zelda", "Super Mario Bros", "Metroid", "Castlevania"],
       respostaCerta: "The Legend of Zelda"
     }
   ];
