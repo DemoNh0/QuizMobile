@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>quiz</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="quiz">
+  <ion-item>
+    <ion-label>
+      {{quiz.questao}}
+    </ion-label>
+  </ion-item>
+  <ion-radio-group>
+    <ion-item *ngFor="let resposta of quiz.respostas">
+      <ion-label>
+        {{resposta}}
+      </ion-label>
+      <ion-radio slot="start" [value]="resposta"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+</ion-content>
