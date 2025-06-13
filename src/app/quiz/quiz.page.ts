@@ -2,7 +2,7 @@ import { IQuiz, IUser } from './../model/IQuiz';
 import { NavigationExtras, Router } from '@angular/router'
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Tab1Page, user } from '../tab1/tab1.page';
+import { Tab1Page } from '../tab1/tab1.page';
 
 import { ToastController, AlertController } from '@ionic/angular';
 
@@ -18,11 +18,12 @@ export class QuizPage implements OnInit {
   respostaSelecionada = '';
   quiz: IQuiz;
   questao = 0;
+  user: string = '';
 
 
   jogador: IUser[] =[
     {
-      nome: user[0],
+      nome: this.user,
       pontuacao: this.pontuacaoJogador
     }
 
@@ -90,7 +91,8 @@ export class QuizPage implements OnInit {
     }
   ];
 
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(private route: ActivatedRoute,
+              private router: Router,
               private alertController: AlertController,
               private toastController: ToastController
             )
@@ -111,6 +113,11 @@ export class QuizPage implements OnInit {
 
   nextQuiz(){
 
+    if (!this.respostaSelecionada) {
+      this.alertaQuestao('Selecione uma resposta antes de continuar.');
+      return;
+    }
+
     if (this.respostaSelecionada == this.quiz.respostaCerta) {
       this.pontuacaoJogador++;
     }
@@ -123,6 +130,15 @@ export class QuizPage implements OnInit {
       this.quiz = this.listaQuiz[this.questao];
       this.showAlert('Fim do Quiz');
     }
+  }
+
+  async alertaQuestao(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Por favor responda a questão',
+      message: message,
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 
   async showAlert(message: string) {

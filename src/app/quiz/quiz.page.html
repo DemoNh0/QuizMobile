@@ -10,14 +10,11 @@
       {{quiz.questao}}
     </ion-label>
   </ion-item>
-  <!-- <ion-radio-group>
-    <ion-item *ngFor="let resposta of quiz.respostas">
-      <ion-label>
-        {{resposta}}
-      </ion-label>
-      <ion-radio slot="start" [value]="resposta"></ion-radio>
+
+    <ion-item>
+      <p>Jogando como {{user}}</p>
     </ion-item>
-  </ion-radio-group> -->
+
 
   <ion-radio-group [(ngModel)]="respostaSelecionada">
     <ion-item>

@@ -18,7 +18,7 @@ export class Tab1Page {
               private toastController: ToastController
               ) {}
 
-
+  user = '';
 
   jogador: IUser [] = [
     {
@@ -93,7 +93,13 @@ export class Tab1Page {
   ];
 
   irParaQuiz(quiz: IQuiz){
-    const navigationExtras: NavigationExtras = {state:{paramQuiz:quiz}};
+    console.log('valor do user: ', this.user);
+    const navigationExtras: NavigationExtras = {
+      state: {
+        paramQuiz:quiz,
+        user: this.user
+      }
+    };
     this.router.navigate(['/quiz'], navigationExtras);
   }
 };
