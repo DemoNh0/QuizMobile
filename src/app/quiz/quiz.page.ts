@@ -132,6 +132,11 @@ export class QuizPage implements OnInit {
     }
   }
 
+  finishQuiz() {
+    const navigationExtras: NavigationExtras = { state: {}};
+    this.router.navigate(['tabs/tab2/'], navigationExtras);
+  }
+
   async alertaQuestao(message: string) {
     const alert = await this.alertController.create({
       header: 'Por favor responda a questão',

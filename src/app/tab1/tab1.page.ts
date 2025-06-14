@@ -15,8 +15,8 @@ export class Tab1Page {
 
   constructor(public router: Router,
               private alertController: AlertController,
-              private toastController: ToastController
-              ) {}
+              private toastController: ToastController,
+  ) {}
 
   user = '';
 
@@ -26,8 +26,6 @@ export class Tab1Page {
       pontuacao: 0
     }
   ]
-
-
 
   listaQuiz: IQuiz[] = [
     {
@@ -94,13 +92,8 @@ export class Tab1Page {
 
   irParaQuiz(quiz: IQuiz){
     console.log('valor do user: ', this.user);
-    const navigationExtras: NavigationExtras = {
-      state: {
-        paramQuiz:quiz,
-        user: this.user
-      }
-    };
-    this.router.navigate(['/quiz'], navigationExtras);
+    const navigationExtras: NavigationExtras = { state: { paramQuiz:quiz, user: this.user }};
+    this.router.navigate([`quiz/${this.user}`], navigationExtras);
   }
 };
 
