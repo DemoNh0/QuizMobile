@@ -2,6 +2,7 @@ import { IQuiz, IUser } from './../model/IQuiz';
 import { Component } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router'
 import { ToastController, AlertController } from '@ionic/angular';
+import{ JogadorQuizService } from '../services/jogador-quiz.service';
 
 @Component({
   selector: 'app-tab1',
@@ -92,8 +93,9 @@ export class Tab1Page {
 
   irParaQuiz(quiz: IQuiz){
     console.log('valor do user: ', this.user);
+    localStorage.setItem('user', this.user);
     const navigationExtras: NavigationExtras = { state: { paramQuiz:quiz, user: this.user }};
-    this.router.navigate([`quiz/${this.user}`], navigationExtras);
+    this.router.navigateByUrl(`quiz/${this.user}`, navigationExtras);
   }
 };
 

@@ -11,7 +11,7 @@ const routes: Routes = [
     loadChildren: () => import('./quiz/quiz.module').then( m => m.QuizPageModule)
   },
   {
-    path: 'tabs/tab2/',
+    path: 'tabs/tab2/:jogador/:pontos',
     loadChildren: () => import('./tab2/tab2.module').then( m => m.Tab2PageModule)
   }
 ];

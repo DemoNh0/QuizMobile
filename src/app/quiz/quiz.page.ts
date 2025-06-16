@@ -18,16 +18,8 @@ export class QuizPage implements OnInit {
   respostaSelecionada = '';
   quiz: IQuiz;
   questao = 0;
-  user: string = '';
+  user: any;
 
-
-  jogador: IUser[] =[
-    {
-      nome: this.user,
-      pontuacao: this.pontuacaoJogador
-    }
-
-  ]
   listaQuiz: IQuiz[] = [
     {
       numeroQuestao: "1",
@@ -91,7 +83,7 @@ export class QuizPage implements OnInit {
     }
   ];
 
-  constructor(private route: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private alertController: AlertController,
               private toastController: ToastController
@@ -102,13 +94,14 @@ export class QuizPage implements OnInit {
   }
 
   ngOnInit() {
-     this.route.queryParams.subscribe(params => {
+     this.activatedRoute.queryParams.subscribe(params => {
       const getNav = this.router.getCurrentNavigation();
       if (getNav?.extras.state) {
         this.quiz = getNav.extras.state['paramQuiz'];
       }
     });
     this.quiz = this.listaQuiz[this.questao];
+    this.user = this.activatedRoute.snapshot.paramMap.get('jogador');
   }
 
   nextQuiz(){
@@ -133,9 +126,16 @@ export class QuizPage implements OnInit {
   }
 
   finishQuiz() {
-    const navigationExtras: NavigationExtras = { state: {}};
-    this.router.navigate(['tabs/tab2/'], navigationExtras);
+       const usuario: IUser = {
+    nome: this.user,
+    pontuacao: this.pontuacaoJogador
+  };
+
+   localStorage.setItem('usuario', JSON.stringify(usuario));
+       const navigationExtras: NavigationExtras = { state: {}};
+    this.router.navigateByUrl(`tabs/tab2/${this.user}/${this.pontuacaoJogador}`, navigationExtras);
   }
+
 
   async alertaQuestao(message: string) {
     const alert = await this.alertController.create({
