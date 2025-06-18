@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IQuiz, IUser } from './../model/IQuiz';
 import { AlertController, ToastController } from '@ionic/angular';
 import{ IonicStorageModule } from '@ionic/storage-angular';
+import { timeout } from 'rxjs';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -25,8 +26,8 @@ export class Tab2Page implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
-      this.user = params.get('jogador') ?? '';
-      this.pontuacao = params.get('pontos') ?? '';
+      this.user = localStorage.getItem('user');
+      this.pontuacao = localStorage.getItem('pontuacao');
 
       const jogadoresSalvos = localStorage.getItem('jogadores');
       if (jogadoresSalvos) {
@@ -54,5 +55,10 @@ export class Tab2Page implements OnInit {
       this.listaJogador = this.listaJogador.slice(0, 10);
       localStorage.setItem('jogadores', JSON.stringify(this.listaJogador));
     });
+  }
+
+  async limparRanking() {
+    localStorage.clear();
+    location.reload();
   }
 }
