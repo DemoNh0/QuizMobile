@@ -14,7 +14,7 @@ import { ToastController, AlertController } from '@ionic/angular';
 })
 export class QuizPage implements OnInit {
 
-  pontuacaoJogador = 0;
+  pontuacaoJogador = 1;
   respostaSelecionada = '';
   quiz: IQuiz;
   questao = 0;
@@ -112,7 +112,7 @@ export class QuizPage implements OnInit {
     }
 
     if (this.respostaSelecionada == this.quiz.respostaCerta) {
-      this.pontuacaoJogador++;
+      this.pontuacaoJogador = this.pontuacaoJogador + 1;
     }
 
     this.questao++;
@@ -126,15 +126,15 @@ export class QuizPage implements OnInit {
   }
 
   finishQuiz() {
-       const usuario: IUser = {
+  const usuario: IUser = {
     nome: this.user,
     pontuacao: this.pontuacaoJogador
   };
 
-   localStorage.setItem('usuario', JSON.stringify(usuario));
-       const navigationExtras: NavigationExtras = { state: {}};
-    this.router.navigateByUrl(`tabs/tab2/${this.user}/${this.pontuacaoJogador}`, navigationExtras);
-  }
+  localStorage.setItem('pontuacao', JSON.stringify(this.pontuacaoJogador));
+
+  this.router.navigate(['tabs/tab2', { jogador: this.user, pontos: this.pontuacaoJogador }]);
+}
 
 
   async alertaQuestao(message: string) {

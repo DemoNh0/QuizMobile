@@ -10,7 +10,7 @@ import{ IonicStorageModule } from '@ionic/storage-angular';
   styleUrls: ['tab2.page.scss'],
   standalone: false,
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
                 private router: Router,
@@ -20,33 +20,39 @@ export class Tab2Page {
 
   user: any;
   pontuacao: any;
+
   listaJogador: IUser[] = [];
 
   ngOnInit() {
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.user = params.get('jogador') ?? '';
+      this.pontuacao = params.get('pontos') ?? '';
 
-  //   const usuarioSalvo = localStorage.getItem('usuario');
-  // if (usuarioSalvo) {
-  //   const usuario: IUser = JSON.parse(usuarioSalvo);
-
-  //   this.listaJogador = [usuario];
-  // } else {
-  //   this.listaJogador = [];
-  // }
-
-    this.user = this.activatedRoute.snapshot.paramMap.get('jogador') ?? '';
-    this.pontuacao = this.activatedRoute.snapshot.paramMap.get('pontos') ?? '';
-
-
-    this.listaJogador = [
-      {
-      nome: this.user,
-      pontuacao: Number(this.pontuacao)
+      const jogadoresSalvos = localStorage.getItem('jogadores');
+      if (jogadoresSalvos) {
+        this.listaJogador = JSON.parse(jogadoresSalvos);
+      } else {
+        this.listaJogador = [];
       }
-    ];
 
-    this.user.sort((a: IUser, b: IUser) => b.pontuacao - a.pontuacao);
+      if (this.user) {
+        const pontuacaoAtual = Number(this.pontuacao);
+        const jogadorExistente = this.listaJogador.find(j => j.nome === this.user);
+        if (jogadorExistente) {
+          if (pontuacaoAtual > jogadorExistente.pontuacao) {
+            jogadorExistente.pontuacao = pontuacaoAtual;
+          }
+        } else {
+          this.listaJogador.push({
+            nome: this.user,
+            pontuacao: pontuacaoAtual
+          });
+        }
+      }
+
+      this.listaJogador.sort((a: IUser, b: IUser) => b.pontuacao - a.pontuacao);
+      this.listaJogador = this.listaJogador.slice(0, 10);
+      localStorage.setItem('jogadores', JSON.stringify(this.listaJogador));
+    });
   }
-
-
-
 }
